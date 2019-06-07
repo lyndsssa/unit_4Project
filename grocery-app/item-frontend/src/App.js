@@ -1,15 +1,21 @@
 import React from 'react';
 
-// when instructed you will be asked to import the required compoonents...
-// but only do so when instructed
+/// components ///
+import Header from './components/Header'
+import TaskList from './components/ItemList'
+import Form from './components/Form'
 
 function App() {
   return (
     <div className="main-container">
-    {/* when instructed you will be asked to render the imported components */}
+      <Header />
+      <Form />
+      <ItemList />
      <h1>Grocery List</h1>
     </div>
   );
 }
+
+
 
 export default App;
