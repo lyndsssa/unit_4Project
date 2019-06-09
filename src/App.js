@@ -1,19 +1,32 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 /// components ///
 import Header from './components/Header'
-import TaskList from './components/ItemList'
+import ItemList from './components/ItemList'
 import Form from './components/Form'
 
-function App() {
+class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      currentView: 'items'
+    }
+  }
+  render(){
   return (
     <div className="main-container">
-      <Header />
+    <h1>Grocery List</h1>
+    <h2>You will never forget it again </h2>
+      <Header
+      currentView={this.state.currentView}
+       />
       <Form />
-      <ItemList />
-     <h1>Grocery List</h1>
+      <ItemList
+      currentView={this.state.currentView}
+      />
     </div>
   );
+}
 }
 
 
