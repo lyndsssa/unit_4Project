@@ -4,6 +4,7 @@ import Items from './Items'
 
 class ItemList extends Component {
  render() {
+     console.log('this: ', this)
    return (
        <div className="item-list">
        { this.props.currentView === 'toGet'
