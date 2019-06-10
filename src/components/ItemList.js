@@ -11,13 +11,16 @@ class ItemList extends Component {
            ? <div>
              {this.props.itemsToGet.map( (item, index) => {
                return (
+
                  <Items
                    key={index}
                    item={item}
                    handleCheck={this.props.handleCheck}
                    arrayIndex={index}
                    currentArray='itemsToGet'
+                   handleDelete={this.props.handleDelete}
                  />
+
                )
              })}
              </div>
@@ -30,6 +33,7 @@ class ItemList extends Component {
                      handleCheck={this.props.handleCheck}
                      arrayIndex={index}
                      currentArray='purchasedItems'
+                     handleDelete={this.props.handleDelete}
                    />
                  )
               })}

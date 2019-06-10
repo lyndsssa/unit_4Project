@@ -23,7 +23,7 @@ class App extends Component {
     this.updateArray = this.updateArray.bind(this)
     this.handleCheck = this.handleCheck.bind(this)
     this.removeFromArray = this.removeFromArray.bind(this)
-
+    this.handleDelete = this.handleDelete.bind(this)
 
   }
   fetchItems() {
@@ -93,6 +93,21 @@ handleCreateTask(item) {
   //   [array]: [...prevState[array].splice(arrayIndex, 1)]
   // }))
 }
+
+handleDelete(itemId, arrayIndex, currentArray) {
+    console.log('Inside App:handleDelete (itemId): ', itemId)
+    console.log('Inside App:handleDelete (arrayIndex): ', arrayIndex)
+    console.log('Inside App:handleDelete (currentArray): ', currentArray)
+    fetch(`https://grocery-backend-api.herokuapp.com/items/${itemId}`, {
+        method: 'DELETE'
+    })
+    .then(data => {
+        this.removeFromArray(currentArray, arrayIndex)
+    })
+    .catch(err => console.log('ERROR in handleDelete: ', err))
+}
+
+
 // updateArray
   updateArray(task,array){
   this.setState( prevState => ({
@@ -143,7 +158,7 @@ setItems(purchased, toGet) {
       purchasedItems={this.state.purchasedItems}
       itemsToGet={this.state.itemsToGet}
       handleView={this.handleView}
-
+      handleDelete={this.handleDelete}
       />
 
   </div>
