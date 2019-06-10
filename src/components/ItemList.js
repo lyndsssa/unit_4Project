@@ -11,7 +11,6 @@ class ItemList extends Component {
            ? <div>
              {this.props.itemsToGet.map( (item, index) => {
                return (
-
                  <Items
                    key={index}
                    item={item}
@@ -20,7 +19,6 @@ class ItemList extends Component {
                    currentArray='itemsToGet'
                    handleDelete={this.props.handleDelete}
                  />
-
                )
              })}
              </div>
