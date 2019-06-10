@@ -58,12 +58,18 @@ handleCreateTask(item) {
     .catch( err => console.log('this is err', err))
 }
 // handle checking of item
-  handleCheck(items, arrayIndex, currentArray){
+  handleCheck(item, arrayIndex, currentArray) {
+    console.log('Inside App:handleCheck (PUT)')
+    console.log('Inside App:handleCheck (item): ', item)
+    console.log('Inside App:handleCheck (arrayIndex): ', arrayIndex)
+    console.log('Inside App:handleCheck (currentArray): ', currentArray)
+
     // this toggles the completed value
-    items.purchased = !items.purchased
+    item.purchased = !item.purchased
+    console.log('Inside App:handleCheck (item): ', item)
     // now we make our fetch call to PUT (update)
-    fetch('https://grocery-backend-api.herokuapp.com/items' + items.id, {
-      body:JSON.stringify(items),
+    fetch(`https://grocery-backend-api.herokuapp.com/items/${item.id}`, {
+      body:JSON.stringify(item),
       method:'PUT',
       headers: {
         'Accept': 'application/json, text/plain, */*',
@@ -146,21 +152,22 @@ setItems(purchased, toGet) {
     <h1>Grocery List</h1>
     <h2>You will never forget it again </h2>
       <Header
-      currentView={this.state.currentView}
-      handleView={this.handleView}
-      toGetCount={this.state.itemsToGet.length}
-      purchasedItemsCount={this.state.purchasedItems.length}
+          currentView={this.state.currentView}
+          handleView={this.handleView}
+          toGetCount={this.state.itemsToGet.length}
+          purchasedItemsCount={this.state.purchasedItems.length}
        />
       <Form
-        handleCreateTask={this.handleCreateTask}/>
-      <ItemList
-      currentView={this.state.currentView}
-      purchasedItems={this.state.purchasedItems}
-      itemsToGet={this.state.itemsToGet}
-      handleView={this.handleView}
-      handleDelete={this.handleDelete}
+          handleCreateTask={this.handleCreateTask}
       />
-
+      <ItemList
+          currentView={this.state.currentView}
+          purchasedItems={this.state.purchasedItems}
+          itemsToGet={this.state.itemsToGet}
+          handleView={this.handleView}
+          handleDelete={this.handleDelete}
+          handleCheck={this.handleCheck}
+      />
   </div>
   );
 }

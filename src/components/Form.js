@@ -1,24 +1,16 @@
 import React, { Component } from 'react'
 
-// class Form extends Component {
-//   render() {
-//     return (
-//         <div className="form">
-//           this is the form component
-//         </div>
-//     )
-//   }
-// }
-//
-// export default Form
 class Form extends Component {
- constructor(props) {
-   super(props)
-   this.state = {
-     grocery_item: '',
-     completed:false
-   }
- }
+    constructor(props) {
+        super(props)
+        this.state = {
+            grocery_item: '',
+            completed:false
+        }
+        this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.clearForm = this.clearForm.bind(this)
+    }
 
  handleSubmit = (e) => {
     e.preventDefault()
@@ -39,10 +31,25 @@ class Form extends Component {
      <div className="form" onSubmit={this.handleSubmit}>
         <form>
          <input type='text'
-           value={this.state.grocery_item}
+           value={this.state.grocery}
            onChange={this.handleChange}
-           placeholder="Create/ Add a new item to the list"
-           />
+           placeholder="grocery item"
+         />
+         <input type='text'
+           value={this.state.brand}
+           onChange={this.handleChange}
+           placeholder="item brand"
+         />
+         <input type='text'
+           value={this.state.size}
+           onChange={this.handleChange}
+           placeholder="size"
+         />
+         <input type='text'
+           value={this.state.quantity}
+           onChange={this.handleChange}
+           placeholder="quantity"
+         />
          <button type="submit" className="submit-button"><i className="fas fa-plus"></i></button>
         </form>
       </div>
