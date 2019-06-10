@@ -9,8 +9,121 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentView: 'items'
+      currentView: 'toGet',
+      purchasedItems: [],
+      itemsToGet: [],
+
     }
+    this.fetchItems = this.fetchItems.bind(this)
+    this.handleView = this.handleView.bind(this)
+    this.componentDidMount = this.componentDidMount.bind(this)
+    this.sortItems = this.sortItems.bind(this)
+    this.setItems = this.setItems.bind(this)
+    this.handleCreateTask = this.handleCreateTask.bind(this)
+    this.updateArray = this.updateArray.bind(this)
+    this.handleCheck = this.handleCheck.bind(this)
+    this.removeFromArray = this.removeFromArray.bind(this)
+
+
+  }
+  fetchItems() {
+  fetch('https://grocery-backend-api.herokuapp.com/items')
+   .then( data => data.json())
+   .then( jData => {
+     console.log('this is jData', jData)
+     this.sortItems(jData)
+   })
+}
+handleView(view) {
+  // updating state causes a render
+  this.setState({
+    currentView: view
+  })
+}
+// adding updating items
+handleCreateTask(item) {
+  fetch('https://grocery-backend-api.herokuapp.com/items', {
+    body:JSON.stringify(item),
+    method:'POST',
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    }
+  })
+    .then( addedItem => addedItem.json())
+    .then( jData => {
+      this.updateArray(jData, 'itemsToGet')
+      this.handleView('toGet')
+    })
+    .catch( err => console.log('this is err', err))
+}
+// handle checking of item
+  handleCheck(items, arrayIndex, currentArray){
+    // this toggles the completed value
+    items.purchased = !items.purchased
+    // now we make our fetch call to PUT (update)
+    fetch('https://grocery-backend-api.herokuapp.com/items' + items.id, {
+      body:JSON.stringify(items),
+      method:'PUT',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then( updatedItem => updatedItem.json())
+    .then(jData => {
+      this.removeFromArray(currentArray, arrayIndex)
+      if(currentArray === 'itemsToGet') {
+        this.updateArray(jData, 'purchasedItems')
+      } else {
+        this.updateArray(jData, 'itemsToGet')
+      }
+    })
+    .catch(err => console.log('this is error from handleCheck', err))
+  }
+// remove item from list
+  removeFromArray(array, arrayIndex){
+  this.setState(prevState => {
+    prevState[array].splice(arrayIndex, 1)
+    return {
+      [array]: prevState[array]
+    }
+  })
+  // this.setState( prevState => ({
+  //   [array]: [...prevState[array].splice(arrayIndex, 1)]
+  // }))
+}
+// updateArray
+  updateArray(task,array){
+  this.setState( prevState => ({
+    [array]:[...prevState[array],task]
+  }))
+}
+// sorting items
+  sortItems(items) {
+  // default counter variables
+  let purchasedItems = []
+  let itemsToGet = []
+  // counter loop
+  items.forEach((item) => {
+    // if task is completed, push it to the completedTasks array
+    if(item.purchased) {
+      purchasedItems.push(item)
+    } else { // otherwise, push it to the todoTasks array
+      itemsToGet.push(item)
+    }
+  })
+  this.setItems(purchasedItems, itemsToGet)
+}
+
+setItems(purchased, toGet) {
+	this.setState({
+		purchasedItems: purchased,
+		itemsToGet: toGet
+	})
+}
+  componentDidMount(){
+    this.fetchItems()
   }
   render(){
   return (
@@ -19,12 +132,21 @@ class App extends Component {
     <h2>You will never forget it again </h2>
       <Header
       currentView={this.state.currentView}
+      handleView={this.handleView}
+      toGetCount={this.state.itemsToGet.length}
+      purchasedItemsCount={this.state.purchasedItems.length}
        />
-      <Form />
+      <Form
+        handleCreateTask={this.handleCreateTask}/>
       <ItemList
       currentView={this.state.currentView}
+      purchasedItems={this.state.purchasedItems}
+      itemsToGet={this.state.itemsToGet}
+      handleView={this.handleView}
+
       />
-    </div>
+
+  </div>
   );
 }
 }
