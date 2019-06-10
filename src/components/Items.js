@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 
 class Items extends Component {
  render() {
+     console.log('this props item: ', this.props.item)
    return (
        <div className="items">
-       <div className="grocery-item">{this.props.item.grocery_item}</div>
+       <div className="grocery-item">{this.props.item.grocery}</div>
        <div className="item-actions">
          {this.props.item.purchased
            ? <i
