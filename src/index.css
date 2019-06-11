@@ -1,11 +1,27 @@
 /* ==========================
+       IMPORT FONTS
+========================== */
+@import url('https://fonts.googleapis.com/css?family=Dosis|Nunito');
+/* font-family   : 'Nunito'; */
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+/* font-family: 'Roboto', sans-serif; */
+@import url('https://fonts.googleapis.com/css?family=Artifika|Handlee|Just+Another+Hand|Patrick+Hand|Sacramento|Shadows+Into+Light|Sofia');
+/* font-family: 'Artifika', serif;
+font-family: 'Handlee', cursive;
+font-family: 'Just Another Hand', cursive;
+font-family: 'Patrick Hand', cursive;
+font-family: 'Sacramento', cursive;
+font-family: 'Shadows Into Light', cursive;
+font-family: 'Sofia', cursive; */
+
+/* ==========================
        GENERAL
 ========================== */
 body {
  background-image: url("https://i.pinimg.com/564x/12/71/30/1271304ac3b65f870c0646ca8a118796.jpg");
  background-repeat: no-repeat;
  background-size: cover;
- font-family: var(--regular-font);
+ font-family: 'Nunito';
  color: #333;
  width:100%; height:100%;
 }
@@ -27,49 +43,74 @@ body {
 ========================== */
 .mainTitle{
  text-align: center;
+ font-family: 'Shadows Into Light', cursive;
+ font-size: 46px;
+ margin: auto;
+ margin-bottom: 0.2em;
 }
 .header {
  width: 100%;
  display: flex;
  justify-content: space-between;
  margin-bottom: 1em;
+ margin-top: 1em;
 }
-.header h1 {
+/* .header h1 {
  font-family: var(--accent-font);
  margin: 0;
-}
-.header h2 {
+} */
+/* .header h2 {
  font-size: 0.8em;
  font-family: var(--accent-font);
  margin: -5px 0;
  color: #888;
-}
-.header ul {
+} */
+/* .header ul {
  list-style-type: none;
  margin: 0;
  text-align: right;
  font-size: 0.8em;
  font-weight: 900;
-}
+} */
 .header li {
  margin: 5px 0;
- color: var(--second-accent);
+ /* color: var(--second-accent); */
 }
 .header li:hover {
  cursor: pointer;
- color: var(--main-accent);
+ /* color: var(--main-accent); */
+}
+
+.head-wrap {
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
 /* ==========================
        FORM
 ========================== */
 .form {
- /* margin-bottom: 10px; */
+ margin-bottom: 10px;
  /* padding-bottom: 10px; */
- border-bottom: 2px solid var(--main-accent);
 }
 .bold {
     font-weight: 800;
+}
+span.bold {
+    width: 70px;
+    float: left;
+}
+span.current.bold {
+    width: auto;
+}
+ul > li {
+    font-family: 'Handlee', cursive;
+}
+.specifics {
+    color: #0303a0;
+    font-size: 17px;
 }
 input[type="text"] {
  width: 92%;
@@ -98,8 +139,8 @@ input[type="text"]:focus {
  background: #444;
  border: 1px solid #444;
 }
-.submit-button:focus {
- outline: 0;
+.submit-button:active {
+ outline: dashed grey;
 }
 /* ==========================
      ITEM LIST & ITEMS
@@ -121,7 +162,11 @@ input[type="text"]:focus {
  letter-spacing: .5px;
 }
 .grocery-item {
- color: var(--darker-second-accent);
+ font-family: 'Roboto';
+}
+h4 > span {
+    color: navy;
+    font-family: 'Artifika', serif;
 }
 .item-actions i {
  margin: 0px 3px;
@@ -133,28 +178,34 @@ input[type="text"]:focus {
  color: orange;
 }
 .complete:hover {
- color: lightgreen;
+ color: green;
 }
 .delete:hover {
- color: var(--main-accent);
  color: red;
 }
 
-.shoppingList{
+.shoppingList, .purchasedItems{
   list-style-type: none;
-  padding-left: 2em;
 }
 
-.purchasedItems{
+/* .purchasedItems{
  list-style-type: none;
  padding-right: 2em;
+} */
+.current {
+    color: blue;
+    text-transform: uppercase;
 }
 
 .slogan{
  font-size: 20px;
- font-style: italic;
+ /* font-style: italic; */
  font-weight: lighter;
  text-align: center;
+ color: dodgerblue;
+ font-family: 'Shadows Into Light', cursive;
+ margin: auto;
+ margin-bottom: 1.8em;
 }
 .headers{
  font-size: 15px;

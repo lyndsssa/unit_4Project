@@ -155,7 +155,6 @@ class App extends Component {
           itemsToGet.push(item)
         }
       })
-
       this.setItems(purchasedItems, itemsToGet)
     }
 
