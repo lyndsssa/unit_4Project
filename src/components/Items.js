@@ -24,10 +24,10 @@ class Items extends Component {
                             ></i>
                        </div>
                    </h4>
-                   <ul>
-                       <li>{this.props.item.brand}</li>
-                       <li>{this.props.item.size}</li>
-                       <li>{this.props.item.quantity}</li>
+                   <ul className="itemInfo">
+                      <li><span className="bold"> Brand: </span>{this.props.item.brand}</li>
+                      <li><span className="bold"> Size: </span> {this.props.item.size}</li>
+                      <li><span className="bold"> Quantity: </span> {this.props.item.quantity}</li>
                   </ul>
                </div>
            </div>

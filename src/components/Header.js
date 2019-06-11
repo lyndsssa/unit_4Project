@@ -8,20 +8,20 @@ class Header extends Component {
         <div className="">
         {/* TODO */}
             <div>
-                <h2>
+                <h2 className="headers">
                     {this.props.currentView === 'toGet'
                         ? 'SHOPPING LIST'
-                        : 'ITEMS PURCHASED'
+                        : 'PURCHASED ITEMS'
                     }
                 </h2>
             </div>
-            <div className="header">
-                <li onClick={() => {this.props.handleView('toGet')}}>
+            <div className="header bold">
+                <li className="shoppingList" onClick={() => {this.props.handleView('toGet')}}>
                   Shopping List: {this.props.toGetCount}
                 </li>
                 {/* COMPLETED */}
-                <li onClick = {() => {this.props.handleView('purchased')}}>
-                  Items Purchased: {this.props.purchasedItemsCount}
+                <li className="purchasedItems bold" onClick = {() => {this.props.handleView('purchased')}}>
+                  Purchased Items: {this.props.purchasedItemsCount}
                 </li>
             </div>
         </div>

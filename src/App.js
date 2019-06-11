@@ -173,8 +173,8 @@ class App extends Component {
   render(){
       return (
         <div className="main-container">
-            <h1>Grocery List</h1>
-            <h2>You will never forget it again </h2>
+            <h1 className="mainTitle">Grocery List App</h1>
+            <h2 className="slogan">You will never forget it again </h2>
               <Header
                   currentView={this.state.currentView}
                   handleView={this.handleView}
