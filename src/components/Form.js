@@ -57,7 +57,7 @@ class Form extends Component {
            onChange={this.handleChange}
            placeholder="size"
          />
-         <input type='text'
+        <input type='number'
              id='quantity'
            value={this.state.quantity}
            onChange={this.handleChange}
