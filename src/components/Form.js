@@ -4,8 +4,11 @@ class Form extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            grocery_item: '',
-            completed:false
+            grocery: '',
+            brand: '',
+            size: '',
+            quantity: '',
+            purchased:false
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -19,33 +22,43 @@ class Form extends Component {
  }
 
  handleChange = (e) => {
-    this.setState({grocery_item: e.target.value})
+    this.setState({[e.target.id]: e.target.value})
  }
 
  clearForm = () => {
-   this.setState({ grocery_item: '' })
+   this.setState({
+       grocery: '',
+       brand: '',
+       size: '',
+       quantity: '',
+       purchased:false
+   })
  }
 
  render () {
    return (
-     <div className="form" onSubmit={this.handleSubmit}>
-        <form>
+     <div className="form" >
+        <form onSubmit={this.handleSubmit}>
          <input type='text'
+             id='grocery'
            value={this.state.grocery}
            onChange={this.handleChange}
            placeholder="grocery item"
          />
          <input type='text'
+             id='brand'
            value={this.state.brand}
            onChange={this.handleChange}
            placeholder="item brand"
          />
          <input type='text'
+             id='size'
            value={this.state.size}
            onChange={this.handleChange}
            placeholder="size"
          />
          <input type='text'
+             id='quantity'
            value={this.state.quantity}
            onChange={this.handleChange}
            placeholder="quantity"
