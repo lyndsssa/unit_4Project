@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 
 class Items extends Component {
     render() {
-        console.log('Insize Items:render: (this.props)', this.props)
+        console.log('Inside Items:render: (this.props)', this.props)
         return (
            <div className="items">
                <div className="grocery-item">
                    <h4>{this.props.item.grocery}
                        <div className="item-actions">
-                             {this.props.item.purchased
+                             {this.props.item.purchased === 't'
                                ? <i
                                  className="incomplete far fa-check-square"
                                  onClick={() => {this.props.handleCheck(this.props.item, this.props.arrayIndex, this.props.currentArray)}}

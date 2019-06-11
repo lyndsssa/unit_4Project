@@ -44,6 +44,7 @@ class App extends Component {
 
     // adding updating items
     handleCreateTask(item) {
+        console.log('Inside handleCreateTask (item): ', item)
       fetch('https://grocery-backend-api.herokuapp.com/items', {
         body:JSON.stringify(item),
         method:'POST',
@@ -54,7 +55,7 @@ class App extends Component {
       })
         .then( addedItem => addedItem.json())
         .then( jData => {
-          this.updateArray(jData, 'itemsToGet')
+          this.updateArray(jData[0], 'itemsToGet')
           this.handleView('toGet')
         })
         .catch( err => console.log('this is err', err))
@@ -68,7 +69,10 @@ class App extends Component {
     console.log('Inside App:handleCheck (currentArray): ', currentArray)
 
     // this toggles the completed value
-    item.purchased = !item.purchased
+    console.log('purchased bool before: ', item.purchased)
+    item.purchased === 'f' ? item.purchased = true : item.purchased = false
+    // item.purchased = !item.purchased
+    console.log('purchased bool AFTER: ', item.purchased)
     console.log('Inside App:handleCheck (item): ', item)
     // now we make our fetch call to PUT (update)
     fetch(`https://grocery-backend-api.herokuapp.com/items/${item.id}`, {
@@ -81,11 +85,12 @@ class App extends Component {
     })
     .then( updatedItem => updatedItem.json())
     .then(jData => {
+        console.log('Inside handleCheck (jData): ', jData)
       this.removeFromArray(currentArray, arrayIndex)
       if(currentArray === 'itemsToGet') {
-        this.updateArray(jData, 'purchasedItems')
+        this.updateArray(jData[0], 'purchasedItems')
       } else {
-        this.updateArray(jData, 'itemsToGet')
+        this.updateArray(jData[0], 'itemsToGet')
       }
     })
     .catch(err => console.log('this is error from handleCheck', err))
@@ -114,12 +119,27 @@ class App extends Component {
         .catch(err => console.log('ERROR in handleDelete: ', err))
     }
 
-    // updateArray
-      updateArray(task,array){
-      this.setState( prevState => ({
-        [array]:[...prevState[array],task]
-      }))
+    updateArray(task, array) {
+        console.log('Inside App:updateArray (task): ', task)
+        console.log('Inside App:updateArray (array): ', array)
+        // prevState is a copy of the currentState
+        this.setState( prevState => {
+            // PrevState['todoTasks'].push(task)
+            prevState[array].push(task)
+            console.log('Inside App:updateArray (prevState): ', prevState)
+            // We are returning an object, thus the return {}
+            return {
+                [array]: prevState[array]
+            }
+        })
     }
+
+    // // updateArray
+    //   updateArray(task,array){
+    //   this.setState( prevState => ({
+    //     [array]:[...prevState[array],task]
+    //   }))
+    // }
 
     // sorting items
     sortItems(items) {
@@ -129,12 +149,13 @@ class App extends Component {
       // counter loop
       items.forEach((item) => {
         // if task is completed, push it to the completedTasks array
-        if(item.purchased) {
+        if(item.purchased === 't') {
           purchasedItems.push(item)
         } else { // otherwise, push it to the todoTasks array
           itemsToGet.push(item)
         }
       })
+
       this.setItems(purchasedItems, itemsToGet)
     }
 
