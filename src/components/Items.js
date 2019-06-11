@@ -6,7 +6,7 @@ class Items extends Component {
         return (
            <div className="items">
                <div className="grocery-item">
-                   <h4>{this.props.item.grocery}
+                   <h4><span>{this.props.item.grocery}</span>
                        <div className="item-actions">
                              {this.props.item.purchased === 't'
                                ? <i
@@ -24,10 +24,10 @@ class Items extends Component {
                             ></i>
                        </div>
                    </h4>
-                   <ul>
-                       <li>{this.props.item.brand}</li>
-                       <li>{this.props.item.size}</li>
-                       <li>{this.props.item.quantity}</li>
+                   <ul className="itemInfo">
+                      <li><span className="bold"> Brand: </span><span className="specifics">{this.props.item.brand}</span></li>
+                      <li><span className="bold"> Size: </span><span className="specifics">{this.props.item.size}</span></li>
+                      <li><span className="bold"> Quantity: </span><span className="specifics">{this.props.item.quantity}</span></li>
                   </ul>
                </div>
            </div>
